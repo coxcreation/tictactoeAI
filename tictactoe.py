@@ -42,7 +42,7 @@ class ticTacToeGame:
 				self.winnerChildO+=1
 		
 	def populateChildMoves(self,gb):
-		#print "Turn: "+str(self.turn)
+		# print("Turn: "+str(self.turn))
 		for x in range(len(gb)):
 			if gb[x]==' ':
 				nextTurn = self.turn+1
@@ -51,7 +51,7 @@ class ticTacToeGame:
 					gameMove.append(loc)
 				gameMove[x] = ticTacToeGame.playerSymbols[self.turn%2]
 				childGame = ticTacToeGame(gameMove,nextTurn)
-				#print "Position: "+str(x)+" Board:"+str(gameMove)
+				#print("Position: "+str(x)+" Board:"+str(gameMove))
 				self.childMoves.append(childGame)
 					
 					
@@ -98,15 +98,15 @@ def printBoard(gameArray):
 	else:
 		return "Error: Array mismatch"
 
-print "Loading AI"
+print("Loading AI")
 game1 = ticTacToeGame([' ',' ',' ',' ',' ',' ',' ',' ',' '],0)
-print str(ticTacToeGame.totalOutcomes)
-print ticTacToeGame.turnMoves
-print ticTacToeGame.turnWins
+print(str(ticTacToeGame.totalOutcomes))
+print(ticTacToeGame.turnMoves)
+print(ticTacToeGame.turnWins)
 
 while game1.gameOver is False and game1.gameBoard.count(' ')>0:
-	print printBoard(game1.gameBoard)
-	nexLoc = raw_input("Where should 'X' play?: ")
+	print(printBoard(game1.gameBoard))
+	nexLoc = input("Where should 'X' play?: ")
 	if int(nexLoc)>=0 and int(nexLoc)<9 and game1.gameBoard[int(nexLoc)]==' ':
 		tempBoard=[]
 		for space in game1.gameBoard:
@@ -118,19 +118,19 @@ while game1.gameOver is False and game1.gameBoard.count(' ')>0:
 		
 		
 		#Below is where the AI starts, it works by picking the move with the smallest difference between X and O victories
-		print printBoard(game1.gameBoard)
+		print(printBoard(game1.gameBoard))
 		if game1.gameOver is False and game1.gameBoard.count(' ')>0:
 			maxWinO=0
 			minWinX=1000000
 			minDiff=3000
 			newMove=game1.childMoves[0]
 			for child in game1.childMoves:
-				print "X:"+str(child.winnerChildX)+" O:"+str(child.winnerChildO)+" Diff:"+str(abs(child.winnerChildX-child.winnerChildO))
+				print("X:"+str(child.winnerChildX)+" O:"+str(child.winnerChildO)+" Diff:"+str(abs(child.winnerChildX-child.winnerChildO)))
 			for child in game1.childMoves:
-				#print "X:"+str(child.winnerChildX)+" O:"+str(child.winnerChildO)
+				#print("X:"+str(child.winnerChildX)+" O:"+str(child.winnerChildO))
 				if child.winnerChildX==0 and child.winnerChildO>0:
 					newMove=child
-					print "a"
+					print("a")
 					break
 				#The diff cannot be equal to 196 because on the first move the lowest diff can be this when X goes on 1,3,5,7 and
 				# the AI response was to pic a corner which would allow an X win in 2 moves
@@ -141,7 +141,7 @@ while game1.gameOver is False and game1.gameBoard.count(' ')>0:
 						if cPrime.gameOver and cPrime.winner=='X':
 							minDiff=tempMinDiff
 							newMove=tempNewMove
-							print "b"
+							print("b")
 							break
 						elif child is not None:
 							minDiff=abs(child.winnerChildX-child.winnerChildO)
@@ -155,7 +155,7 @@ while game1.gameOver is False and game1.gameBoard.count(' ')>0:
 						if cPrime.gameOver and cPrime.winner=='X':
 							minWinX=tempMinWinX
 							newMove=tempNewMove
-							print "c"
+							print("c")
 							break
 						elif child is not None:
 							minWinX=child.winnerChildX
@@ -163,9 +163,9 @@ while game1.gameOver is False and game1.gameBoard.count(' ')>0:
 				"""
 			game1 = newMove
 
-print "\n\n\n\n\n"+printBoard(game1.gameBoard)
-print "Game Over!"
+print("\n\n\n\n\n"+printBoard(game1.gameBoard))
+print("Game Over!")
 if game1.gameOver:
-	print game1.winner+" Won!"
+	print(game1.winner+" Won!")
 else:
-	print "Game is a draw."
+	print("Game is a draw.")
