@@ -1,12 +1,11 @@
 ## Synopsis
 
-This program is run in the CLI in python2 using the command, `python tictactoe.py`. This program will need to be
-converted to python3 in the near future
+This program is run in the CLI in python3 using the command, `python3 tictactoe.py`.
 
 ## Getting Started
 
 Things to install:
-* python2
+* python3
 
 ## Contact
 
